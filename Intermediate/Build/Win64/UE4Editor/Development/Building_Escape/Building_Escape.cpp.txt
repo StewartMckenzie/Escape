@@ -1,0 +1,2 @@
+C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Development\Building_Escape\Definitions.Building_Escape.h
+C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Source\Building_Escape\Building_Escape.h
