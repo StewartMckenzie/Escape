@@ -22,10 +22,9 @@ void UWorldPosition::BeginPlay()
 
 
 	FString ActorName = GetOwner()->GetName();
-
-
 	UE_LOG(LogTemp, Warning, TEXT("This component is attached to %s."),*ActorName);
-
+	FString ActorPosition = GetOwner()->GetActorLocation().ToString();
+	UE_LOG(LogTemp, Warning, TEXT("This component is located at  %s."), *ActorPosition);
 	
 	
 }
