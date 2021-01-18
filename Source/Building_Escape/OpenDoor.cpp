@@ -2,6 +2,8 @@
 
 #include "OpenDoor.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/PlayerController.h"
+#include "Engine/World.h"
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -19,7 +21,13 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 	InitialYaw = GetOwner()->GetActorRotation().Yaw;
 	CurrentYaw = InitialYaw;
-	TargetYaw = InitialYaw + 90.f;
+	OpenAngle += InitialYaw;
+
+	if (!PressurePlate) {
+		FString ActorName = GetOwner()->GetName();
+		UE_LOG(LogTemp, Error, TEXT("This component is attached to %s."), *ActorName);
+	}
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 // Called every frame
@@ -27,9 +35,17 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UE_LOG(LogTemp, Warning, TEXT("Yaw is: %f"), GetOwner()->GetActorRotation().Yaw);
+	if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens)) {
+		HandleDoor(DeltaTime, OpenAngle, OpenSpeed);
+		DoorLastOpened = GetWorld()->GetTimeSeconds();
+	}
+	else if (GetWorld()->GetTimeSeconds() - DoorLastOpened > DoorCloseDelay) {
+		HandleDoor(DeltaTime, InitialYaw, CloseSpeed);
+	}
+}
 
-	CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, 2);
+void UOpenDoor::HandleDoor(float DeltaTime, float& Yaw, float& RoationSpeed) {
+	CurrentYaw = FMath::FInterpTo(CurrentYaw, Yaw, DeltaTime, RoationSpeed);
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = CurrentYaw;
 	GetOwner()->SetActorRotation(DoorRotation);
