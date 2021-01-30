@@ -230,8 +230,8 @@
 /I Runtime\Experimental\GeometryCollectionSimulationCore\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\ClothingSystemRuntimeInterface
 /I Runtime\ClothingSystemRuntimeInterface\Public
-/I C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Inc\Building_Escape
-/I C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Source
+/I C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Inc\Building_Escape
+/I C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Source
 /I ThirdParty\PhysX3\PxShared\include
 /I ThirdParty\PhysX3\PxShared\include\cudamanager
 /I ThirdParty\PhysX3\PxShared\include\filebuf
@@ -261,12 +261,12 @@
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"
-/FI"C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\Building_EscapeEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Yu"C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\Building_EscapeEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\Building_EscapeEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-"C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Inc\Building_Escape\Building_Escape.init.gen.cpp"
-/FI"C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Development\Building_Escape\Definitions.Building_Escape.h"
-/Fo"C:\Users\mckst\Desktop\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Development\Building_Escape\Building_Escape.init.gen.cpp.obj"
+/FI"C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\Building_EscapeEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Yu"C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\Building_EscapeEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\Building_EscapeEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+"C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Inc\Building_Escape\Building_Escape.init.gen.cpp"
+/FI"C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Development\Building_Escape\Definitions.Building_Escape.h"
+/Fo"C:\Users\mckst\Desktop\Coding\GameDev\Escape\Building_Escape\Intermediate\Build\Win64\UE4Editor\Development\Building_Escape\Building_Escape.init.gen.cpp.obj"
 /TP
 /GR-
 /W4
