@@ -1,4 +1,5 @@
 // Copyright Stewart Mkcenzie 2021
+#include "Components/AudioComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
@@ -32,7 +33,7 @@ void UGrabber::SetUpInputComponent() {
 
 void UGrabber::FindPhysicsHandle() {
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
-	if (PhysicsHandle == nullptr) {
+	if (!PhysicsHandle) {
 		UE_LOG(LogTemp, Warning, TEXT("%s does not have a physics handle component. Attach one to avoid any errors"), *GetOwner()->GetName());
 	}
 }
@@ -42,28 +43,20 @@ void UGrabber::Grab() {
 	FHitResult HitResult = GetFirstPhysicsBodyInReach();
 
 	UPrimitiveComponent* ComponentToGrab = HitResult.GetComponent();
+	AActor* ActorHit = HitResult.GetActor();
 
 	//if we hit something attach the physics body
-	if (HitResult.GetActor()) {
+	if (ActorHit) {
+		if (!PhysicsHandle) return;
 		PhysicsHandle->GrabComponentAtLocation(ComponentToGrab, NAME_None, GetPlayersReach());
 	}
-}
-
-FVector UGrabber::GetPlayersReach() const {
-	FVector PlayerViewPointLocation;
-	FRotator PlayerViewPointRotation;
-
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
-
-	return  PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
 }
 
 void UGrabber::Release() {
 	UE_LOG(LogTemp, Warning, TEXT("Grabber Released"));
 	//remove/relase the physics handle
-	if (PhysicsHandle->GetGrabbedComponent()) {
-		PhysicsHandle->ReleaseComponent();
-	}
+	if (!PhysicsHandle) return;
+	PhysicsHandle->ReleaseComponent();
 }
 
 // Called every frame
@@ -71,7 +64,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	//physical handle has been attached is attached
-
+	if (!PhysicsHandle) return;
 	if (PhysicsHandle->GrabbedComponent) {
 		//move object we are holding
 
@@ -107,4 +100,13 @@ FVector UGrabber::GetPlayersWorldPos() const {
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
 
 	return PlayerViewPointLocation;
+}
+
+FVector UGrabber::GetPlayersReach() const {
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
+
+	return  PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
 }

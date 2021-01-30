@@ -1,9 +1,10 @@
-// Copyright Stewart Mkcenzie 2021
+// Copyright Stewart Mckenzie 2021
 
 #pragma once
-#include "Engine/TriggerVolume.h"
+
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -22,24 +23,41 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void HandleDoor(float DeltaTime, float& Angle, float& RoationSpeed);
+	void OpenDoor(float DeltaTime);
+	void CloseDoor(float DeltaTime);
+	float TotalMassOfActors() const;
+	void FindAudioComponent();
+	void FindpressurePlate();
+
+	// Tracks whether the sound has been played.
+	bool OpenDoorSound = false;
+	bool CloseDoorSound = true;
 
 private:
 
 	float InitialYaw;
 	float CurrentYaw;
-	float DoorLastOpened = 0.f;
+
 	UPROPERTY(EditAnywhere)
-		ATriggerVolume* PressurePlate;
-	UPROPERTY(EditAnywhere)
-		float DoorCloseDelay = .5f;
-	UPROPERTY(EditAnywhere)
-		float CloseSpeed = 4.f;
-	UPROPERTY(EditAnywhere)
-		float OpenSpeed = 4.f;
+		float MassToOpenDoors = 50.f;
+
 	UPROPERTY(EditAnywhere)
 		float OpenAngle = 90.f;
 
+	float DoorLastOpened = 0.f;
+
 	UPROPERTY(EditAnywhere)
-		AActor* ActorThatOpens;
+		float DoorCloseDelay = .5f;
+
+	UPROPERTY(EditAnywhere)
+		float DoorOpenSpeed = .8f;
+
+	UPROPERTY(EditAnywhere)
+		float DoorCloseSpeed = 2.f;
+
+	UPROPERTY(EditAnywhere)
+		ATriggerVolume* PressurePlate = nullptr;
+
+	UPROPERTY()
+		UAudioComponent* AudioComponent = nullptr;
 };

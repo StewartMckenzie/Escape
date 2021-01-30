@@ -23,9 +23,11 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 private:
-	float Reach = 100.f;
-	UPhysicsHandleComponent* PhysicsHandle = nullptr;
-	UInputComponent* InputComponent = nullptr;
+	float Reach = 200.f;
+	UPROPERTY()
+		UPhysicsHandleComponent* PhysicsHandle = nullptr;
+	UPROPERTY()
+		UInputComponent* InputComponent = nullptr;
 	void Grab();
 	void Release();
 	void FindPhysicsHandle();
