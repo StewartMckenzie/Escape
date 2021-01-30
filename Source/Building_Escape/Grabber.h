@@ -31,4 +31,6 @@ private:
 	void FindPhysicsHandle();
 	void SetUpInputComponent();
 	FHitResult GetFirstPhysicsBodyInReach() const;
+	FVector GetPlayersReach() const;
+	FVector GetPlayersWorldPos() const;
 };
